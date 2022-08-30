@@ -1,0 +1,19 @@
+services:
+    wordpress:
+        build:
+           context: srcs/wordpress
+           dockerfile: Dockerfile
+        image: wordpress
+        container_name: wordpress
+        restart: always
+    ngnix:
+        build:
+           context: srcs/ngnix
+           dockerfile: Dockerfile
+        image: ngnix
+        container_name: ngnix
+        ports: 
+               - 443-443
+        depends_on: 
+               - wordpress
+        restart: always
