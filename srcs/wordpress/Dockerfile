@@ -15,8 +15,9 @@ RUN useradd -g wordpress_user wordpress_user
 
 #copy php-fpm config file
 COPY wordpress_pool.conf /etc/php/7.3/fpm/pool.d/wordpress_pool.conf
+RUN mkdir -p /var/run
 
-CMD ["service", "php7.3-fpm", "start", "-F"]
+CMD ["php-fpm7.3", "-F"]
 
 #Download wordpress files
 # RUN curl -LO https://wordpress.org/latest.zip
