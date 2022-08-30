@@ -14,6 +14,7 @@ RUN apt install -y php-fpm
 RUN groupadd wordpress_user
 RUN useradd -g wordpress_user wordpress_user
 RUN mkdir -p /run/php/
+
 #copy php-fpm config file
 COPY wordpress_pool.conf /etc/php/7.3/fpm/pool.d/wordpress_pool.conf
 CMD ["php-fpm7.3", "-F"]
