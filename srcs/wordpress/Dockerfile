@@ -1,6 +1,5 @@
 FROM debian:buster
 
-EXPOSE 9000
 #insall Wordpress
 RUN apt-get update
 RUN apt-get install -y zip
@@ -13,15 +12,18 @@ RUN apt install -y php-fpm
 
 RUN groupadd wordpress_user
 RUN useradd -g wordpress_user wordpress_user
+RUN mkdir -p /var/www/html
 RUN mkdir -p /run/php/
 
-#copy php-fpm config file
-COPY wordpress_pool.conf /etc/php/7.3/fpm/pool.d/wordpress_pool.conf
 
 RUN mkdir -p /var/run
 
-CMD ["php-fpm7.3", "-F"]
 
 #Download wordpress files
-#RUN curl -LO https://wordpress.org/latest.zip
-#RUN unzip latest.zip
+RUN curl -LO https://wordpress.org/latest.zip
+RUN unzip latest.zip
+RUN cp -R wordpress/* /var/www/html/
+
+#copy php-fpm config file
+COPY www.conf /etc/php/7.3/fpm/pool.d/www.conf
+CMD ["php-fpm7.3", "-F"]

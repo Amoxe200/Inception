@@ -4,9 +4,10 @@ FROM debian:buster
 RUN apt-get update
 RUN apt-get upgrade
 RUN apt-get install -y -f nginx
+RUN apt-get install vim curl -y
 
 #Copy config file
-COPY nginx.conf /etc/nginx/sites-available/nginx.conf
+COPY default /etc/nginx/sites-available/default
 
 #Run the ngnix server
 CMD ["/usr/sbin/nginx", "-g", "daemon off;"]

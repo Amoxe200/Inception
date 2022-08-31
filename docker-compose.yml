@@ -6,6 +6,10 @@ services:
         image: wordpress
         container_name: wordpress
         restart: always
+        volumes:
+               - wordpress:/var/www/html/
+        networks:
+               - wp
     ngnix:
         build:
            context: srcs/ngnix
@@ -13,7 +17,19 @@ services:
         image: ngnix
         container_name: ngnix
         ports: 
-               - 443-443
+               - "443:443"
         depends_on: 
                - wordpress
         restart: always
+        volumes:
+               - nginx:/etc/nginx/conf.d
+        networks:
+               - wp
+networks:
+    wp:
+        driver: bridge
+
+volumes:
+    nginx:
+    wordpress:
+               
