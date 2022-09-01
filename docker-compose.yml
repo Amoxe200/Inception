@@ -1,4 +1,16 @@
 services:
+    mariadb:
+        build:
+           context: srcs/mariadb
+           dockerfile: Dockerfile
+        image: mariadb
+        container_name: mariadb
+        restart: always
+        ports:
+             - "3306-3306"
+        environment:
+             - MYSQL_ROOT_PASSWORD=mypassword
+             - MYSQL_DATADIR=/var/lib/mysql
     wordpress:
         build:
            context: srcs/wordpress
@@ -6,6 +18,8 @@ services:
         image: wordpress
         container_name: wordpress
         restart: always
+        depends_on:
+               - mariadb
        #  volumes:
        #         - wordpress:/var/www/html/
         networks:
