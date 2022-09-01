@@ -6,8 +6,8 @@ services:
         image: wordpress
         container_name: wordpress
         restart: always
-        volumes:
-               - wordpress:/var/www/html/
+       #  volumes:
+       #         - wordpress:/var/www/html/
         networks:
                - wp
     ngnix:
@@ -17,12 +17,10 @@ services:
         image: ngnix
         container_name: ngnix
         ports: 
-               - "443:443"
+               - "80:80"
         depends_on: 
                - wordpress
         restart: always
-        volumes:
-               - nginx:/etc/nginx/conf.d
         networks:
                - wp
 networks:
@@ -31,5 +29,5 @@ networks:
 
 volumes:
     nginx:
-    wordpress:
+#     wordpress:
                
