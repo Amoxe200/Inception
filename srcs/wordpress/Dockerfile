@@ -7,23 +7,19 @@ RUN apt-get install -y unzip
 RUN apt-get install -y curl
 
 #install php and php-fpm
-RUN apt install -y php php-common
+RUN apt install -y php php-common php-mysql
 RUN apt install -y php-fpm
-
-RUN groupadd wordpress_user
-RUN useradd -g wordpress_user wordpress_user
-RUN mkdir -p /var/www/html
 RUN mkdir -p /run/php/
-
-
 RUN mkdir -p /var/run
 
-
 #Download wordpress files
-RUN curl -LO https://wordpress.org/latest.zip
-RUN unzip latest.zip
-RUN cp -R wordpress/* /var/www/html/
+RUN apt-get install curl mariadb-client -y
+RUN curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
+RUN chmod +x wp-cli.phar
+RUN mv wp-cli.phar /usr/bin/wp
+
+COPY ./wp-sh.sh /wp-sh.sh
 
 #copy php-fpm config file
 COPY www.conf /etc/php/7.3/fpm/pool.d/www.conf
-CMD ["php-fpm7.3", "-F"]
+CMD ["bash", "wp-sh.sh"]

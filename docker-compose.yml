@@ -6,11 +6,11 @@ services:
         image: mariadb
         container_name: mariadb
         restart: always
-        ports:
-             - "3306-3306"
         environment:
              - MYSQL_ROOT_PASSWORD=mypassword
              - MYSQL_DATADIR=/var/lib/mysql
+        networks:
+            - wp
     wordpress:
         build:
            context: srcs/wordpress
@@ -18,12 +18,12 @@ services:
         image: wordpress
         container_name: wordpress
         restart: always
-        depends_on:
-               - mariadb
-       #  volumes:
-       #         - wordpress:/var/www/html/
+        volumes:
+               - wordpress:/var/www/html/
         networks:
                - wp
+        depends_on:
+               - mariadb
     ngnix:
         build:
            context: srcs/ngnix
@@ -32,8 +32,8 @@ services:
         container_name: ngnix
         ports: 
                - "80:80"
-        depends_on: 
-               - wordpress
+        volumes:
+               - wordpress:/var/www/html/
         restart: always
         networks:
                - wp
@@ -42,6 +42,5 @@ networks:
         driver: bridge
 
 volumes:
-    nginx:
-#     wordpress:
+       wordpress:
                
