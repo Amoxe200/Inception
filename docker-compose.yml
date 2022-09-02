@@ -1,7 +1,8 @@
+version: '3'
 services:
-    mariadb:
-        build:
-           context: srcs/mariadb
+       mariadb:
+              build:
+              context: srcs/mariadb
            dockerfile: Dockerfile
         image: mariadb
         container_name: mariadb
