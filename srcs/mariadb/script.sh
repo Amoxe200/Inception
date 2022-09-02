@@ -12,10 +12,10 @@ n
 y
 EOF
 
-mysql -u root -e "CREATE USER 'mariadb_user'@'localhost' IDENTIFIED BY 'secret';";
-mysql -u root -e "CREATE USER 'mariadb_user'@'%' IDENTIFIED BY 'secret';";
+mysql -u root -e "CREATE USER '${DBUSER}'@'localhost' IDENTIFIED BY '${DBPASS}';";
+mysql -u root -e "CREATE USER '${DBUSER}r'@'%' IDENTIFIED BY '${DBPASS}';";
 
-mysql -u root -e "GRANT ALL ON *.* TO 'mariadb_user'@'localhost';"
-mysql -u root -e "GRANT ALL ON *.* TO 'mariadb_user'@'%';"
+mysql -u root -e "GRANT ALL ON *.* TO '${DBUSER}'@'localhost';"
+mysql -u root -e "GRANT ALL ON *.* TO '${DBUSER}'@'%';"
 mysql -u root -e "FLUSH PRIVILEGES;"
-mysql -u root -e "CREATE DATABASE wordpress;"
+mysql -u root -e "CREATE DATABASE '${DBNAME}';"
