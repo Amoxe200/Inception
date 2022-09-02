@@ -13,7 +13,7 @@ y
 EOF
 
 mysql -u root -e "CREATE USER '${DBUSER}'@'localhost' IDENTIFIED BY '${DBPASS}';";
-mysql -u root -e "CREATE USER '${DBUSER}r'@'%' IDENTIFIED BY '${DBPASS}';";
+mysql -u root -e "CREATE USER '${DBUSER}'@'%' IDENTIFIED BY '${DBPASS}';";
 
 mysql -u root -e "GRANT ALL ON *.* TO '${DBUSER}'@'localhost';"
 mysql -u root -e "GRANT ALL ON *.* TO '${DBUSER}'@'%';"
