@@ -1,6 +1,6 @@
 version: '3'
 services:
-    mariadb:
+     mariadb:
         build:
            context: srcs/mariadb
            dockerfile: Dockerfile
@@ -11,11 +11,10 @@ services:
              - MYSQL_ROOT_PASSWORD=mypassword
              - MYSQL_DATADIR=/var/lib/mysql
         networks:
-            - wp
+             - wp
         volumes:
-              MDB: 
-            - /var/lib/mysql
-    wordpress:
+             - MDB:/var/lib/mysql
+     wordpress:
         build:
            context: srcs/wordpress
            dockerfile: Dockerfile
@@ -28,7 +27,7 @@ services:
                - wp
         depends_on:
                - mariadb
-    ngnix:
+     ngnix:
         build:
            context: srcs/ngnix
            dockerfile: Dockerfile
@@ -56,5 +55,3 @@ volumes:
                      type: none
                      device: /home/aaqari/data/db
                      o: bind
-
-               
