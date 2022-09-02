@@ -13,7 +13,8 @@ services:
         networks:
             - wp
         volumes:
-              -MDB: /var/lib/mysql
+              MDB: 
+            - /var/lib/mysql
     wordpress:
         build:
            context: srcs/wordpress
