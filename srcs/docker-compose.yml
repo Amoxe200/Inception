@@ -26,6 +26,8 @@ services:
                - wp
         depends_on:
                - mariadb
+        env_file:
+               - .env
      ngnix:
         build:
            context: srcs/ngnix
@@ -39,6 +41,8 @@ services:
         restart: always
         networks:
                - wp
+        env_file:
+               - .env
 networks:
     wp:
         driver: bridge
