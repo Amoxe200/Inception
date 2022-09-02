@@ -2,7 +2,7 @@ version: '3'
 services:
      mariadb:
         build:
-           context: srcs/mariadb
+           context: srcs/requirements/mariadb
            dockerfile: Dockerfile
         image: mariadb
         container_name: mariadb
@@ -15,7 +15,7 @@ services:
              - MDB:/var/lib/mysql
      wordpress:
         build:
-           context: srcs/wordpress
+           context: srcs/requirements/wordpress
            dockerfile: Dockerfile
         image: wordpress
         container_name: wordpress
@@ -30,7 +30,7 @@ services:
                - .env
      ngnix:
         build:
-           context: srcs/ngnix
+           context: srcs/requirements/ngnix
            dockerfile: Dockerfile
         image: ngnix
         container_name: ngnix
