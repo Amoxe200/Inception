@@ -11,6 +11,8 @@ services:
              - MYSQL_DATADIR=/var/lib/mysql
         networks:
             - wp
+        volumes:
+              -MDB: /var/lib/mysql
     wordpress:
         build:
            context: srcs/wordpress
@@ -19,7 +21,7 @@ services:
         container_name: wordpress
         restart: always
         volumes:
-               - wordpress:/var/www/html/
+               - wordpress:/var/www/html
         networks:
                - wp
         depends_on:
@@ -43,4 +45,14 @@ networks:
 
 volumes:
        wordpress:
+              driver_opts:
+                     type: none
+                     device: /home/aaqari/data/wordpress
+                     o: bind
+       MDB:
+              driver_opts:
+                     type: none
+                     device: /home/aaqari/data/db
+                     o: bind
+
                
