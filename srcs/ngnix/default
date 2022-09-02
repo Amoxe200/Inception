@@ -1,8 +1,12 @@
 server {
-    listen 80;
-    listen [::]:80;
+    listen 443 ssl;
+    listen [::]:443 ssl;
 
-    root /var/www/html;
+    ssl_protocols TLSv1.2;
+    ssl_certificate /cert/ssl_certificat.crt;
+    ssl_certificate_key /cert/ssl_certificat.key;
+
+    root /var/www/html/wp;
     index index.php index.html index.htm index.nginx-debian.html;
 
     server_name _;
@@ -14,6 +18,6 @@ server {
 
     location ~ \.php$ {
         include snippets/fastcgi-php.conf;
-        fastcgi_pass wordpress:9000;  
+        fastcgi_pass wordpress:9000;
     }
 }

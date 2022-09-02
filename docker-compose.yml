@@ -31,7 +31,7 @@ services:
         image: ngnix
         container_name: ngnix
         ports: 
-               - "80:80"
+               - "443:443"
         volumes:
                - wordpress:/var/www/html/
         restart: always
